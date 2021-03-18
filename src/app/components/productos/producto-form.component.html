@@ -1,0 +1,25 @@
+<div class="card bg-light mb-3">
+    <div class="card-header">{{titulo}}</div>
+    <div class="card-body">
+        <button class="btn btn-secondary btn-sm my-2" routerLink="/productos">
+            <fa-icon [icon]="faArrowLeft"></fa-icon> Volver
+        </button>
+        <br />
+        <form>
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre" class="form-control" [(ngModel)]="model.nombre">
+                <div class="alert alert-danger mt-2" *ngIf="error?.nombre">
+                    {{error.nombre}}
+                </div>
+            </div>
+            <div class="form-group">
+            </div>
+        </form>
+    </div>
+    <div class="card-footer text-muted">
+        <button type="button" class="btn btn-primary btn-sm float-right" (click)="model.id? editar() : crear()">
+            <fa-icon [icon]="faSave" class="mr-2"></fa-icon>{{model.id? 'Editar':'Crear'}}
+        </button>
+    </div>
+</div>

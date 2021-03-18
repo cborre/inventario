@@ -1,0 +1,43 @@
+<div class="card bg-light mb-3">
+    <div class="card-header">{{titulo}}</div>
+    <div class="card-body">
+        <button class="btn btn-primary btn-sm my-2" routerLink="/mercancias/form">
+            <fa-icon [icon]="faPlusSquare" class="mr-2"></fa-icon>Crear
+        </button>
+        <div class="alert alert-info" *ngIf="lista?.length==0">
+            No hay mercancias en el sistema.
+        </div>
+        <table class="table table-hover table-striped" *ngIf="lista?.length>0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Fecha de ingreso</th>
+                    <th>Producto</th>
+                    <th>Usuario que registro</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let mercancia of lista">
+                    <td>{{mercancia.id}}</td>
+                    <td>{{mercancia.nombre}}</td>
+                    <td>{{mercancia.cantidad}}</td>
+                    <td>{{mercancia.fechaIngreso}}</td>
+                    <td>{{mercancia.producto.nombre}}</td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" [routerLink]="['/mercancias/form', mercancia.id]">
+                            <fa-icon [icon]="faEdit"></fa-icon>
+                        </button>
+                        <button class="btn btn-danger btn-sm ml-2" (click)="eliminar(mercancia)">
+                            <fa-icon [icon]="faTrash"></fa-icon>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <mat-paginator [length]="totalRegistros" [pageSize]="totalPorPagina" [pageIndex]="paginaActual" [pageSizeOptions]="pageSizeOptions" (page)="paginar($event)" showFirstLastButtons class="float-left mx-2">
+        </mat-paginator>
+    </div>
+</div>
